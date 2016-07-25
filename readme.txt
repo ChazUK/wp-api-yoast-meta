@@ -1,4 +1,11 @@
-=== WP API Yoast SEO === Contributors: ChazUK Tags: yoast, wp-api, rest, seo Requires at least: 4.4 Tested up to: 4.5.3 Stable tag: master License: GPLv2 or later License URI: http://www.gnu.org/licenses/gpl-2.0.html
+=== WP API Yoast SEO ===
+Contributors: ChazUK
+Tags: yoast, wp-api, rest, seo
+Requires at least: 4.4
+Tested up to: 4.5.3
+Stable tag: trunk
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Returns Yoast post or page metadata in a normal post or page request.
 
@@ -13,6 +20,11 @@ Activate the plugin through the 'Plugins' screen in WordPress
 ...
 Profit
 == Changelog ==
+
+= 1.1 =
+
+Using Class instead of plain function
+Added output to public custom post types
 
 = 1.0 =
 
