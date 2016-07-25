@@ -5,6 +5,8 @@ For use with the new [WP REST API](http://v2.wp-api.org/)
 
 Returns Yoast post or page metadata in a normal post or page request.  Stores the metadata in the `yoast_meta` field of the returned data.
 
+Supports pages, posts and any *public* custom post type
+
 Currently fetching:
 
 - `yoast_wpseo_focuskw`
