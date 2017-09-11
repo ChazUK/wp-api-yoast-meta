@@ -21,6 +21,12 @@ Activate the plugin through the 'Plugins' screen in WordPress
 Profit
 == Changelog ==
 
+= 1.2 =
+
+Changed `register_api_field` to `register_rest_field` as it's depracated
+Changed the metadata name to `yoast` rather than `yoast_meta`
+Removed the `yoast_wpseo_` prefix from the returned meta as it seems undeed
+
 = 1.1 =
 
 Using Class instead of plain function
