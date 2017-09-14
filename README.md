@@ -24,4 +24,4 @@ Currently fetching:
 - `twitter-description`
 - `twitter-image`
 
-Thanks to [jmfurlott/wp-api-yoast](https://github.com/jmfurlott/wp-api-yoast)
+Thanks to [jmfurlott/wp-api-yoast](https://github.com/jmfurlott/wp-api-yoast) & [Glasshouse/wp-api-yoast-meta](https://github.com/Glasshouse/wp-api-yoast-meta)
