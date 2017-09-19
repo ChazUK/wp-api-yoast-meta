@@ -155,7 +155,7 @@ class WPAPIYoastMeta {
 			'yoast_wpseo_twitter-description'   => get_post_meta( $post['id'], '_yoast_wpseo_twitter-description', true ),
 			'yoast_wpseo_twitter-image'         => get_post_meta( $post['id'], '_yoast_wpseo_twitter-image', true ),
 			'yoast_wpseo_homepage_title'        => $this->get_title_home_wpseo(),
-			'yoast_wpseo_home_metadesc'         => $this->get_metadesc_home_wpseo(),
+			'yoast_wpseo_homepage_metadesc'         => $this->get_metadesc_home_wpseo(),
 		);
 
 		return (array) $yoastMeta;
@@ -168,7 +168,7 @@ class WPAPIYoastMeta {
 			'yoast_wpseo_title'          => $wpseo_frontend->get_taxonomy_title(),
 			'yoast_wpseo_metadesc'       => $wpseo_frontend->metadesc(false),
 			'yoast_wpseo_homepage_title' => $this->get_title_home_wpseo(),
-			'yoast_wpseo_home_metadesc'  => $this->get_metadesc_home_wpseo(),
+			'yoast_wpseo_homepage_metadesc'  => $this->get_metadesc_home_wpseo(),
 		);
 
 		return (array) $yoastMeta;
