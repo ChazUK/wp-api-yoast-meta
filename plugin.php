@@ -136,26 +136,35 @@ class WPAPIYoastMeta {
 		return $wpseo_replace_vars->replace( $metadesc, $post_data, $omit );
 	}
 
-	function wp_api_encode_yoast( $post, $field_name, $request ) {
+	function wp_api_encode_yoast( $p, $field_name, $request ) {
+		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
+
+		$args = array(
+  		'p'         => $p['id'], // ID of a page, post, or custom type
+  		'post_type' => 'any'
+		);
+
+		$GLOBALS['wp_query'] = new WP_Query( $args );
+
 		$yoastMeta = array(
-			'yoast_wpseo_focuskw'               => get_post_meta( $post['id'], '_yoast_wpseo_focuskw', true ),
-			'yoast_wpseo_title'                 => get_post_meta( $post['id'], '_yoast_wpseo_title', true ),
-			'yoast_wpseo_metadesc'              => get_post_meta( $post['id'], '_yoast_wpseo_metadesc', true ),
-			'yoast_wpseo_linkdex'               => get_post_meta( $post['id'], '_yoast_wpseo_linkdex', true ),
-			'yoast_wpseo_metakeywords'          => get_post_meta( $post['id'], '_yoast_wpseo_metakeywords', true ),
-			'yoast_wpseo_meta-robots-noindex'   => get_post_meta( $post['id'], '_yoast_wpseo_meta-robots-noindex', true ),
-			'yoast_wpseo_meta-robots-nofollow'  => get_post_meta( $post['id'], '_yoast_wpseo_meta-robots-nofollow', true ),
-			'yoast_wpseo_meta-robots-adv'       => get_post_meta( $post['id'], '_yoast_wpseo_meta-robots-adv', true ),
-			'yoast_wpseo_canonical'             => get_post_meta( $post['id'], '_yoast_wpseo_canonical', true ),
-			'yoast_wpseo_redirect'              => get_post_meta( $post['id'], '_yoast_wpseo_redirect', true ),
-			'yoast_wpseo_opengraph-title'       => get_post_meta( $post['id'], '_yoast_wpseo_opengraph-title', true ),
-			'yoast_wpseo_opengraph-description' => get_post_meta( $post['id'], '_yoast_wpseo_opengraph-description', true ),
-			'yoast_wpseo_opengraph-image'       => get_post_meta( $post['id'], '_yoast_wpseo_opengraph-image', true ),
-			'yoast_wpseo_twitter-title'         => get_post_meta( $post['id'], '_yoast_wpseo_twitter-title', true ),
-			'yoast_wpseo_twitter-description'   => get_post_meta( $post['id'], '_yoast_wpseo_twitter-description', true ),
-			'yoast_wpseo_twitter-image'         => get_post_meta( $post['id'], '_yoast_wpseo_twitter-image', true ),
+			'yoast_wpseo_title'                 => $wpseo_frontend->get_content_title(),
+			'yoast_wpseo_metadesc'              => $wpseo_frontend->metadesc(false),
+			'yoast_wpseo_focuskw'               => get_post_meta( $p['id'], '_yoast_wpseo_focuskw', true ),
+			'yoast_wpseo_linkdex'               => get_post_meta( $p['id'], '_yoast_wpseo_linkdex', true ),
+			'yoast_wpseo_metakeywords'          => get_post_meta( $p['id'], '_yoast_wpseo_metakeywords', true ),
+			'yoast_wpseo_meta-robots-noindex'   => get_post_meta( $p['id'], '_yoast_wpseo_meta-robots-noindex', true ),
+			'yoast_wpseo_meta-robots-nofollow'  => get_post_meta( $p['id'], '_yoast_wpseo_meta-robots-nofollow', true ),
+			'yoast_wpseo_meta-robots-adv'       => get_post_meta( $p['id'], '_yoast_wpseo_meta-robots-adv', true ),
+			'yoast_wpseo_canonical'             => get_post_meta( $p['id'], '_yoast_wpseo_canonical', true ),
+			'yoast_wpseo_redirect'              => get_post_meta( $p['id'], '_yoast_wpseo_redirect', true ),
+			'yoast_wpseo_opengraph-title'       => get_post_meta( $p['id'], '_yoast_wpseo_opengraph-title', true ),
+			'yoast_wpseo_opengraph-description' => get_post_meta( $p['id'], '_yoast_wpseo_opengraph-description', true ),
+			'yoast_wpseo_opengraph-image'       => get_post_meta( $p['id'], '_yoast_wpseo_opengraph-image', true ),
+			'yoast_wpseo_twitter-title'         => get_post_meta( $p['id'], '_yoast_wpseo_twitter-title', true ),
+			'yoast_wpseo_twitter-description'   => get_post_meta( $p['id'], '_yoast_wpseo_twitter-description', true ),
+			'yoast_wpseo_twitter-image'         => get_post_meta( $p['id'], '_yoast_wpseo_twitter-image', true ),
 			'yoast_wpseo_homepage_title'        => $this->get_title_home_wpseo(),
-			'yoast_wpseo_homepage_metadesc'         => $this->get_metadesc_home_wpseo(),
+			'yoast_wpseo_homepage_metadesc'     => $this->get_metadesc_home_wpseo(),
 		);
 
 		return (array) $yoastMeta;
