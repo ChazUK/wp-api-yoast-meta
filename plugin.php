@@ -57,31 +57,32 @@ class WPAPIYoastMeta {
 			)
 		);
 
-    // Category
+	    // Category
 		register_rest_field( 'category',
-        'yoast',
-        array(
-            'get_callback'    => array( $this, 'wp_api_encode_yoast_category' ),
-            'update_callback' => null,
-            'schema'          => null,
-        )
-    );
+	        'yoast_meta',
+	        array(
+	            'get_callback'    => array( $this, 'wp_api_encode_yoast_category' ),
+	            'update_callback' => null,
+	            'schema'          => null,
+	        )
+	    );
 
-  	// Tag
-  	register_rest_field( 'tag',
-        'yoast',
-        array(
-            'get_callback'    => array( $this, 'wp_api_encode_yoast_tag' ),
-            'update_callback' => null,
-            'schema'          => null,
-        )
-    );
+	  	// Tag
+	  	register_rest_field( 'tag',
+	        'yoast_meta',
+	        array(
+	            'get_callback'    => array( $this, 'wp_api_encode_yoast_tag' ),
+	            'update_callback' => null,
+	            'schema'          => null,
+	        )
+	    );
 
 		// Public custom post types
 		$types = get_post_types( array(
 			'public'   => true,
 			'_builtin' => false
 		) );
+		
 		foreach ( $types as $key => $type ) {
 			register_rest_field( $type,
 				'yoast_meta',
