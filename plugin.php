@@ -34,6 +34,8 @@ class WPAPIYoastMeta {
 
 	function __construct() {
 		add_action( 'rest_api_init', array( $this, 'add_yoast_data' ) );
+
+		add_filter('worona_get_site_info', array($this,'get_site_info'));
 	}
 
 	function add_yoast_data() {
@@ -82,7 +84,7 @@ class WPAPIYoastMeta {
 			'public'   => true,
 			'_builtin' => false
 		) );
-		
+
 		foreach ( $types as $key => $type ) {
 			register_rest_field( $type,
 				'yoast_meta',
@@ -187,6 +189,14 @@ class WPAPIYoastMeta {
 		$GLOBALS['wp_query'] = new WP_Query( $args );
 
 		return $this->wp_api_encode_taxonomy();
+	}
+
+	function get_site_info($site_info) {
+
+		$site_info['homepage_title'] = $this->get_title_home_wpseo();
+		$site_info['homepage_metadesc'] = $this->get_metadesc_home_wpseo();
+
+		return $site_info;
 	}
 
 }
