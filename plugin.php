@@ -3,6 +3,8 @@
 include __DIR__ . '/classes/class-wpseo-replace-vars.php';
 include __DIR__ . '/classes/class-frontend.php';
 
+add_action( 'plugins_loaded', array( 'WPAPIYoastMeta', 'init' ));
+
 /**
  * Plugin Name: WP REST API Yoast SEO
  * Description: Adds Yoast fields to page and post metadata to WP REST API responses
@@ -31,6 +33,11 @@ class WPAPIYoastMeta {
 		'yoast_wpseo_twitter-description',
 		'yoast_wpseo_twitter-image'
 	);
+
+	public static function init() {
+			$class = __CLASS__;
+			new $class;
+	}
 
 	function __construct() {
 		add_action( 'rest_api_init', array( $this, 'add_yoast_data' ) );
@@ -201,4 +208,4 @@ class WPAPIYoastMeta {
 
 }
 
-$WPAPIYoastMeta = new WPAPIYoastMeta();
+//$WPAPIYoastMeta = new WPAPIYoastMeta();
