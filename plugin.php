@@ -1,9 +1,6 @@
 <?php
 
-include __DIR__ . '/classes/class-wpseo-replace-vars.php';
-include __DIR__ . '/classes/class-frontend.php';
-
-add_action( 'plugins_loaded', array( 'WPAPIYoastMeta', 'init' ));
+add_action('plugins_loaded', 'WPAPIYoast_init');
 
 /**
  * Plugin Name: WP REST API Yoast SEO
@@ -33,11 +30,6 @@ class WPAPIYoastMeta {
 		'yoast_wpseo_twitter-description',
 		'yoast_wpseo_twitter-image'
 	);
-
-	public static function init() {
-			$class = __CLASS__;
-			new $class;
-	}
 
 	function __construct() {
 		add_action( 'rest_api_init', array( $this, 'add_yoast_data' ) );
@@ -208,4 +200,20 @@ class WPAPIYoastMeta {
 
 }
 
-//$WPAPIYoastMeta = new WPAPIYoastMeta();
+function WPAPIYoast_init() {
+  if ( class_exists('WPSEO_Frontend') && class_exists('WPSEO_Replace_Vars') ) {
+		include __DIR__ . '/classes/class-wpseo-replace-vars.php';
+		include __DIR__ . '/classes/class-frontend.php';
+
+		$WPAPIYoastMeta = new WPAPIYoastMeta();
+  } else {
+		add_action('admin_notices', 'wpseo_not_loaded');
+	}
+}
+
+function wpseo_not_loaded() {
+    printf(
+      '<div class="error"><p>%s</p></div>',
+      __('<b>WP REST API Yoast SEO</b> plugin not working because <b>Yoast SEO</b> plugin is not active.')
+    );
+}
