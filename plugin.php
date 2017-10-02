@@ -152,8 +152,6 @@ class WPAPIYoastMeta {
 			'yoast_wpseo_title'                 => $wpseo_frontend->get_content_title(),
 			'yoast_wpseo_metadesc'              => $wpseo_frontend->metadesc(false),
 			'yoast_wpseo_canonical'             => $wpseo_frontend->canonical(false),
-			'yoast_wpseo_homepage_title'        => $this->get_title_home_wpseo(),
-			'yoast_wpseo_homepage_metadesc'     => $this->get_metadesc_home_wpseo(),
 		);
 
 		return (array) $yoastMeta;
@@ -165,8 +163,6 @@ class WPAPIYoastMeta {
 		$yoastMeta = array(
 			'yoast_wpseo_title'          => $wpseo_frontend->get_taxonomy_title(),
 			'yoast_wpseo_metadesc'       => $wpseo_frontend->metadesc(false),
-			'yoast_wpseo_homepage_title' => $this->get_title_home_wpseo(),
-			'yoast_wpseo_homepage_metadesc'  => $this->get_metadesc_home_wpseo(),
 		);
 
 		return (array) $yoastMeta;
