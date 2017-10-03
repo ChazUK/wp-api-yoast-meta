@@ -7,7 +7,7 @@ add_action('plugins_loaded', 'WPAPIYoast_init');
  * Description: Adds Yoast fields to page and post metadata to WP REST API responses
  * Author: Charlie Francis, Tedy Warsitha, Pablo Postigo
  * Author URI: https://github.com/ChazUK
- * Version: 1.1.0
+ * Version: 1.3
  * Plugin URI: https://github.com/ChazUK/wp-api-yoast-seo
  */
 class WPAPIYoastMeta {

@@ -21,6 +21,10 @@ Activate the plugin through the 'Plugins' screen in WordPress
 Profit
 == Changelog ==
 
+= 1.3 =
+
+Adapted to the needs of Worona PWA.
+
 = 1.2 =
 
 Changed `register_api_field` to `register_rest_field` as it's depracated
