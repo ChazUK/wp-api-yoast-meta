@@ -1,0 +1,11 @@
+{
+  "name": "mvanmeerbeck/wp-api-yoast-meta",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "Maxime Vanmeerbeck",
+      "email": "mvanmeerbeck@shopbot-inc.com"
+    }
+  ],
+  "require": {}
+}
