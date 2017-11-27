@@ -97,8 +97,15 @@ class WPAPIYoastMeta {
             $this->keys[] = 'yoast_wpseo_primary_' . $taxonomy;
         }
 
+        $frontend = WPSEO_Frontend::get_instance();
+        $object = get_post($post['id']);
+
         foreach ($this->keys as $key) {
-            $yoastMeta[$key] = get_post_meta($post['id'], '_' . $key, true);
+            if ('yoast_wpseo_title' === $key) {
+                $yoastMeta[$key] = $frontend->get_content_title($object);
+            } else {
+                $yoastMeta[$key] = get_post_meta($post['id'], '_' . $key, true);
+            }
         }
 
         return (array) $yoastMeta;
