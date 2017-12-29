@@ -2,7 +2,6 @@
 # Yoast to REST API - WordPress plugin
 
 ![Yoast](Yoast_Logo_Small_RGB.png)
-![Yoast](codeispoetry-rgb.png)
 
 For use with the new [WP REST API](http://v2.wp-api.org/)
 
