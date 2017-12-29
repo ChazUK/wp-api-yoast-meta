@@ -1,5 +1,5 @@
 === Yoast to REST API ===
-Contributors: ChazUK, Niels Garve, Worona PWA team
+Contributors: Niels Garve, Pablo Postigo, Tedy Warsitha, Charlie Francis
 Tags: yoast, wp-api, rest, seo
 Requires at least: 4.4
 Tested up to: 4.9.1
@@ -20,6 +20,11 @@ Activate the plugin through the 'Plugins' screen in WordPress
 ...
 Profit
 == Changelog ==
+
+= 1.4.0 =
+
+Bugfix: now resetting WPSEO_Frontend Singleton everytime before calculations are made
+PHP Coding Standards (https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/#php)
 
 = 1.4.0-alpha =
 
