@@ -32,5 +32,4 @@ Currently updating:
 - `yoast_wpseo_twitter-description`
 - `yoast_wpseo_twitter-image`
 
-Thanks to [worona/wp-api-yoast-meta](https://github.com/worona/wp-api-yoast-meta)
-Thanks to [jmfurlott/wp-api-yoast](https://github.com/jmfurlott/wp-api-yoast)
+Thanks to Pablo Postigo, Tedy Warsitha and Charlie Francis for amazing contributions!

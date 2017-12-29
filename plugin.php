@@ -5,8 +5,10 @@ add_action('plugins_loaded', 'WPAPIYoast_init');
 /**
  * Plugin Name: Yoast to REST API
  * Description: Adds Yoast fields to page and post metadata to WP REST API responses
- * Author: Charlie Francis, Tedy Warsitha, Pablo Postigo, Niels Garve
+ * Author: Niels Garve, Pablo Postigo, Tedy Warsitha, Charlie Francis
+ * Author URI: https://github.com/niels-garve
  * Version: 1.4.0-alpha
+ * Plugin URI: https://github.com/niels-garve/yoast-to-rest-api
  */
 class WPAPIYoastMeta {
 
@@ -113,10 +115,8 @@ class WPAPIYoastMeta {
 	}
 
     function wp_api_encode_yoast($p, $field_name, $request) {
-        global $post;
-
         $wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
-        $wpseo_replace_vars = new WPAPI_WPSEO_Replace_Vars();
+        $wpseo_frontend->reset();
 
         query_posts(array(
             'p' => $p['id'], // ID of a page, post, or custom type
@@ -125,17 +125,9 @@ class WPAPIYoastMeta {
 
         the_post();
 
-        $metadesc = get_post_meta($p['id'], '_yoast_wpseo_metadesc', true);
-
-        if (empty($metadesc)) {
-            $metadesc = $wpseo_frontend->metadesc(false);
-        } else {
-            $metadesc = $wpseo_replace_vars->replace($metadesc, $post);
-        }
-
         $yoastMeta = array(
             'yoast_wpseo_title' => $wpseo_frontend->get_content_title(),
-            'yoast_wpseo_metadesc' => $metadesc,
+            'yoast_wpseo_metadesc' => $wpseo_frontend->metadesc(false),
             'yoast_wpseo_canonical' => $wpseo_frontend->canonical(false),
         );
 
@@ -146,6 +138,7 @@ class WPAPIYoastMeta {
 
 	private function wp_api_encode_taxonomy (){
 		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
+        $wpseo_frontend->reset();
 
 		$yoastMeta = array(
 			'yoast_wpseo_title'          => $wpseo_frontend->get_taxonomy_title(),
@@ -155,28 +148,37 @@ class WPAPIYoastMeta {
 		return (array) $yoastMeta;
 	}
 
-	function wp_api_encode_yoast_category($category) {
-		$args=array(
-  		'cat' => $category['id'],
-		);
-		$GLOBALS['wp_query'] = new WP_Query( $args );
+    function wp_api_encode_yoast_category($category) {
+        query_posts(array(
+            'cat' => $category['id'],
+        ));
 
-		return $this->wp_api_encode_taxonomy();
-	}
+        the_post();
 
-	function wp_api_encode_yoast_tag($tag){
-		$args=array(
-			'tag_id' => $tag['id'],
-		);
-		$GLOBALS['wp_query'] = new WP_Query( $args );
+        $res = $this->wp_api_encode_taxonomy();
 
-		return $this->wp_api_encode_taxonomy();
-	}
+        wp_reset_query();
+
+        return $res;
+    }
+
+    function wp_api_encode_yoast_tag($tag) {
+        query_posts(array(
+            'tag_id' => $tag['id'],
+        ));
+
+        the_post();
+
+        $res = $this->wp_api_encode_taxonomy();
+
+        wp_reset_query();
+
+        return $res;
+    }
 }
 
 function WPAPIYoast_init() {
-  if ( class_exists('WPSEO_Frontend') && class_exists('WPSEO_Replace_Vars') ) {
-		include __DIR__ . '/classes/class-wpseo-replace-vars.php';
+  if ( class_exists('WPSEO_Frontend') ) {
 		include __DIR__ . '/classes/class-frontend.php';
 
 		$WPAPIYoastMeta = new WPAPIYoastMeta();

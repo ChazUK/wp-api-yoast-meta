@@ -1,5 +1,5 @@
 === Yoast to REST API ===
-Contributors: ChazUK, Niels Garve, Worona PWA team
+Contributors: Niels Garve, Pablo Postigo, Tedy Warsitha, Charlie Francis
 Tags: yoast, wp-api, rest, seo
 Requires at least: 4.4
 Tested up to: 4.9.1
