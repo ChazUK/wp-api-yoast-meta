@@ -7,10 +7,9 @@
  * Main frontend class for Yoast SEO, responsible for the SEO output as well as removing
  * default WordPress output.
  */
-class WPAPI_WPSEO_Frontend extends WPSEO_Frontend {
-
+class WPSEO_Frontend_To_REST_API extends WPSEO_Frontend {
 	/**
-	 * Get the singleton instance of this class
+	 * Get the singleton instance of this class.
 	 *
 	 * @return WPSEO_Frontend
 	 */
@@ -21,5 +20,4 @@ class WPAPI_WPSEO_Frontend extends WPSEO_Frontend {
 
 		return self::$instance;
 	}
-
 }

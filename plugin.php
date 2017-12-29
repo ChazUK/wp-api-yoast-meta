@@ -10,7 +10,7 @@ add_action( 'plugins_loaded', 'WPAPIYoast_init' );
  * Version: 1.4.0
  * Plugin URI: https://github.com/niels-garve/yoast-to-rest-api
  */
-class WPAPIYoastMeta {
+class Yoast_To_REST_API {
 
 	protected $keys = array(
 		'yoast_wpseo_focuskw',
@@ -116,7 +116,7 @@ class WPAPIYoastMeta {
 	}
 
 	function wp_api_encode_yoast( $p, $field_name, $request ) {
-		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
+		$wpseo_frontend = WPSEO_Frontend_To_REST_API::get_instance();
 		$wpseo_frontend->reset();
 
 		query_posts( array(
@@ -126,7 +126,7 @@ class WPAPIYoastMeta {
 
 		the_post();
 
-		$yoastMeta = array(
+		$yoast_meta = array(
 			'yoast_wpseo_title'     => $wpseo_frontend->get_content_title(),
 			'yoast_wpseo_metadesc'  => $wpseo_frontend->metadesc( false ),
 			'yoast_wpseo_canonical' => $wpseo_frontend->canonical( false ),
@@ -134,19 +134,19 @@ class WPAPIYoastMeta {
 
 		wp_reset_query();
 
-		return (array) $yoastMeta;
+		return (array) $yoast_meta;
 	}
 
 	private function wp_api_encode_taxonomy() {
-		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
+		$wpseo_frontend = WPSEO_Frontend_To_REST_API::get_instance();
 		$wpseo_frontend->reset();
 
-		$yoastMeta = array(
+		$yoast_meta = array(
 			'yoast_wpseo_title'    => $wpseo_frontend->get_taxonomy_title(),
 			'yoast_wpseo_metadesc' => $wpseo_frontend->metadesc( false ),
 		);
 
-		return (array) $yoastMeta;
+		return (array) $yoast_meta;
 	}
 
 	function wp_api_encode_yoast_category( $category ) {
@@ -180,9 +180,9 @@ class WPAPIYoastMeta {
 
 function WPAPIYoast_init() {
 	if ( class_exists( 'WPSEO_Frontend' ) ) {
-		include __DIR__ . '/classes/class-frontend.php';
+		include __DIR__ . '/classes/class-wpseo-frontend-to-rest-api.php';
 
-		$WPAPIYoastMeta = new WPAPIYoastMeta();
+		$yoast_To_REST_API = new Yoast_To_REST_API();
 	} else {
 		add_action( 'admin_notices', 'wpseo_not_loaded' );
 	}

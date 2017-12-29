@@ -24,6 +24,7 @@ Profit
 = 1.4.0 =
 
 Bugfix: now resetting WPSEO_Frontend Singleton everytime before calculations are made
+PHP Coding Standards (https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/#php)
 
 = 1.4.0-alpha =
 
