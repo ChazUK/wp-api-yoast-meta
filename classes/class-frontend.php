@@ -9,17 +9,17 @@
  */
 class WPAPI_WPSEO_Frontend extends WPSEO_Frontend {
 
-    /**
-     * Get the singleton instance of this class
-     *
-     * @return WPSEO_Frontend
-     */
-    public static function get_instance() {
-        if ( ! ( self::$instance instanceof self ) ) {
-            self::$instance = new self();
-        }
+	/**
+	 * Get the singleton instance of this class
+	 *
+	 * @return WPSEO_Frontend
+	 */
+	public static function get_instance() {
+		if ( ! ( self::$instance instanceof self ) ) {
+			self::$instance = new self();
+		}
 
-        return self::$instance;
-    }
+		return self::$instance;
+	}
 
 }
