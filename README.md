@@ -17,10 +17,9 @@ Returns Yoast post or page metadata in a normal post or page request. Stores the
     yoast_wpseo_canonical: "http://my-wordpress-site.test/testy-test"
   }
 }
-
 ```
 
-Supports pages, posts, categories, tags and any *public* custom post type
+Supports pages, posts, categories, tags and any *public* custom post types
 
 Currently fetching:
 
