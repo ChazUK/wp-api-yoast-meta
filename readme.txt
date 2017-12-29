@@ -21,6 +21,10 @@ Activate the plugin through the 'Plugins' screen in WordPress
 Profit
 == Changelog ==
 
+= 1.4.0 =
+
+Bugfix: now resetting WPSEO_Frontend Singleton everytime before calculations are made
+
 = 1.4.0-alpha =
 
 Fixed retrieval of meta description
