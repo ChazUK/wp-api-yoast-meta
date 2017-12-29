@@ -144,7 +144,7 @@ class WPAPIYoastMeta {
         return (array)$yoastMeta;
     }
 
-	function wp_api_encode_taxonomy (){
+	private function wp_api_encode_taxonomy (){
 		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
 
 		$yoastMeta = array(
@@ -188,6 +188,6 @@ function WPAPIYoast_init() {
 function wpseo_not_loaded() {
     printf(
       '<div class="error"><p>%s</p></div>',
-      __('<b>WP REST API Yoast SEO</b> plugin not working because <b>Yoast SEO</b> plugin is not active.')
+      __('<b>Yoast to REST API</b> plugin not working because <b>Yoast SEO</b> plugin is not active.')
     );
 }
