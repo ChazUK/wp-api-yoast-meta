@@ -1,8 +1,8 @@
-=== WP API Yoast SEO ===
-Contributors: ChazUK
+=== Yoast to REST API ===
+Contributors: ChazUK, Niels Garve, Worona PWA team
 Tags: yoast, wp-api, rest, seo
 Requires at least: 4.4
-Tested up to: 4.5.3
+Tested up to: 4.9.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,6 +20,11 @@ Activate the plugin through the 'Plugins' screen in WordPress
 ...
 Profit
 == Changelog ==
+
+= 1.4.0-alpha =
+
+Fixed retrieval of meta description
+Generalized/Removed Worona PWA dependencies
 
 = 1.3 =
 

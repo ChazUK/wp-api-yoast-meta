@@ -3,12 +3,10 @@
 add_action('plugins_loaded', 'WPAPIYoast_init');
 
 /**
- * Plugin Name: WP REST API Yoast SEO
+ * Plugin Name: Yoast to REST API
  * Description: Adds Yoast fields to page and post metadata to WP REST API responses
- * Author: Charlie Francis, Tedy Warsitha, Pablo Postigo
- * Author URI: https://github.com/ChazUK
- * Version: 1.3
- * Plugin URI: https://github.com/ChazUK/wp-api-yoast-seo
+ * Author: Charlie Francis, Tedy Warsitha, Pablo Postigo, Niels Garve
+ * Version: 1.4.0-alpha
  */
 class WPAPIYoastMeta {
 
@@ -33,8 +31,6 @@ class WPAPIYoastMeta {
 
 	function __construct() {
 		add_action( 'rest_api_init', array( $this, 'add_yoast_data' ) );
-
-		add_filter('worona_get_site_info', array($this,'get_site_info'));
 	}
 
 	function add_yoast_data() {
@@ -116,48 +112,39 @@ class WPAPIYoastMeta {
 		return $this->wp_api_encode_yoast( $data->ID, null, null );
 	}
 
-	function get_title_home_wpseo() {
-		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
+    function wp_api_encode_yoast($p, $field_name, $request) {
+        global $post;
 
-		return $wpseo_frontend->get_title_from_options( 'title-home-wpseo' );
-	}
+        $wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
+        $wpseo_replace_vars = new WPAPI_WPSEO_Replace_Vars();
 
-	function get_metadesc_home_wpseo() {
-		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
-		$wpseo_replace_vars = new WPAPI_WPSEO_Replace_Vars();
+        query_posts(array(
+            'p' => $p['id'], // ID of a page, post, or custom type
+            'post_type' => 'any'
+        ));
 
-		//Generate metadesc-home-wpseo
-		$metadesc = $wpseo_frontend->options['metadesc-home-wpseo'];
-		$post_data     = array();
-		$omit = array();
+        the_post();
 
-		if ( empty( $metadesc ) ) {
-			$metadesc = get_bloginfo( 'description' );
-		}
+        $metadesc = get_post_meta($p['id'], '_yoast_wpseo_metadesc', true);
 
-		return $wpseo_replace_vars->replace( $metadesc, $post_data, $omit );
-	}
+        if (empty($metadesc)) {
+            $metadesc = $wpseo_frontend->metadesc(false);
+        } else {
+            $metadesc = $wpseo_replace_vars->replace($metadesc, $post);
+        }
 
-	function wp_api_encode_yoast( $p, $field_name, $request ) {
-		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
+        $yoastMeta = array(
+            'yoast_wpseo_title' => $wpseo_frontend->get_content_title(),
+            'yoast_wpseo_metadesc' => $metadesc,
+            'yoast_wpseo_canonical' => $wpseo_frontend->canonical(false),
+        );
 
-		$args = array(
-  		'p'         => $p['id'], // ID of a page, post, or custom type
-  		'post_type' => 'any'
-		);
+        wp_reset_query();
 
-		$GLOBALS['wp_query'] = new WP_Query( $args );
+        return (array)$yoastMeta;
+    }
 
-		$yoastMeta = array(
-			'yoast_wpseo_title'                 => $wpseo_frontend->get_content_title(),
-			'yoast_wpseo_metadesc'              => $wpseo_frontend->metadesc(false),
-			'yoast_wpseo_canonical'             => $wpseo_frontend->canonical(false),
-		);
-
-		return (array) $yoastMeta;
-	}
-
-	function wp_api_encode_taxonomy (){
+	private function wp_api_encode_taxonomy (){
 		$wpseo_frontend = WPAPI_WPSEO_Frontend::get_instance();
 
 		$yoastMeta = array(
@@ -185,15 +172,6 @@ class WPAPIYoastMeta {
 
 		return $this->wp_api_encode_taxonomy();
 	}
-
-	function get_site_info($site_info) {
-
-		$site_info['homepage_title'] = $this->get_title_home_wpseo();
-		$site_info['homepage_metadesc'] = $this->get_metadesc_home_wpseo();
-
-		return $site_info;
-	}
-
 }
 
 function WPAPIYoast_init() {
@@ -210,6 +188,6 @@ function WPAPIYoast_init() {
 function wpseo_not_loaded() {
     printf(
       '<div class="error"><p>%s</p></div>',
-      __('<b>WP REST API Yoast SEO</b> plugin not working because <b>Yoast SEO</b> plugin is not active.')
+      __('<b>Yoast to REST API</b> plugin not working because <b>Yoast SEO</b> plugin is not active.')
     );
 }
