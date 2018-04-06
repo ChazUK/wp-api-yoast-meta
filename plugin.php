@@ -35,7 +35,7 @@ class WPAPIYoastMeta {
 
 	function add_yoast_data() {
 		// Posts
-		register_api_field( 'post',
+		register_rest_field( 'post',
 			'yoast_meta',
 			array(
 				'get_callback'    => array( $this, 'wp_api_encode_yoast' ),
@@ -45,7 +45,7 @@ class WPAPIYoastMeta {
 		);
 
 		// Pages
-		register_api_field( 'page',
+		register_rest_field( 'page',
 			'yoast_meta',
 			array(
 				'get_callback'    => array( $this, 'wp_api_encode_yoast' ),
@@ -60,7 +60,7 @@ class WPAPIYoastMeta {
 			'_builtin' => false
 		) );
 		foreach ( $types as $key => $type ) {
-			register_api_field( $type,
+			register_rest_field( $type,
 				'yoast_meta',
 				array(
 					'get_callback'    => array( $this, 'wp_api_encode_yoast' ),
