@@ -1,3 +1,4 @@
 {
-	"name": "webdevstudios/wp-api-yoast-meta"
+	"name": "webdevstudios/wp-api-yoast-meta",
+	"type": "wordpress-plugin"
 }
