@@ -26,12 +26,25 @@ Currently fetching:
 - `yoast_wpseo_title`
 - `yoast_wpseo_metadesc`
 - `yoast_wpseo_canonical`
+- `yoast_wpseo_facebook_title` aka `yoast_wpseo_opengraph-title`
+- `yoast_wpseo_facebook_description` aka `yoast_wpseo_opengraph-description`
+- `yoast_wpseo_facebook_type`
+- `yoast_wpseo_facebook_image` aka `yoast_wpseo_opengraph-image`
+- `yoast_wpseo_twitter_title`
+- `yoast_wpseo_twitter_description`
+- `yoast_wpseo_twitter_image`
+- `yoast_wpseo_social_url`
+- `yoast_wpseo_website_name`
+- `yoast_wpseo_company_or_person`
+- `yoast_wpseo_person_name`
+- `yoast_wpseo_company_name`
+- `yoast_wpseo_company_logo`
+- `yoast_wpseo_website_name`
+- `yoast_wpseo_social_defaults`
 
 Currently updating:
 
 - `yoast_wpseo_focuskw`
-- `yoast_wpseo_title`
-- `yoast_wpseo_metadesc`
 - `yoast_wpseo_linkdex`
 - `yoast_wpseo_metakeywords`
 - `yoast_wpseo_meta-robots-noindex`
@@ -39,11 +52,25 @@ Currently updating:
 - `yoast_wpseo_meta-robots-adv`
 - `yoast_wpseo_canonical`
 - `yoast_wpseo_redirect`
-- `yoast_wpseo_opengraph-title`
-- `yoast_wpseo_opengraph-description`
-- `yoast_wpseo_opengraph-image`
-- `yoast_wpseo_twitter-title`
-- `yoast_wpseo_twitter-description`
-- `yoast_wpseo_twitter-image`
+
+`yoast_wpseo_defaults` includes the following:
+- `facebook_site`
+- `instagram_url`
+- `linkedin_url`
+- `myspace_url`
+- `og_default_image`
+- `og_frontpage_title`
+- `og_frontpage_desc`
+- `og_frontpage_image`
+- `opengraph`
+- `pinterest_url`
+- `pinterestverify`
+- `plus-publisher`
+- `twitter`
+- `twitter_site`,
+- `twitter_card_type`
+- `youtube_url`
+- `google_plus_url`
+- `fbadminapp`
 
 Thanks to Pablo Postigo, Tedy Warsitha and Charlie Francis for amazing contributions!
